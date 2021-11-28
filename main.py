@@ -4,6 +4,6 @@ from parser import Parser
 def main():
 
     lex = Lexer()
-    parse = Parser()
+    parse = Parser(lex)
 
 main()
