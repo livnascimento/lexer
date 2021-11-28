@@ -1,4 +1,9 @@
+from lexer import Lexer
+from parser import Parser
+
 def main():
-        pass
+
+    lex = Lexer()
+    parse = Parser()
 
 main()
