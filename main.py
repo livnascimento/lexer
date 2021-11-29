@@ -1,9 +1,9 @@
-from lexer import Lexer
-from parser import Parser
+from lexer import lexer
+from parser import parser
 
 def main():
 
-    lex = Lexer()
-    parse = Parser(lex)
+    lex = lexer()
+    parse = parser(lex)
 
 main()

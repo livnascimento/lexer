@@ -1,2 +1,2 @@
-class Parser():
+def parser():
     pass
