@@ -1,6 +1,5 @@
-import tag, token
+from Python3.lexer.token import new_token
+import tag
 
-def create(v):
-  number = token.create(tag.NUM)
-  number['value'] = v
-  return number #{'tag': 270, 'value': }
+def new_num(valor):
+  return new_token(s=valor, t=tag.NUM) #{'string': valor, 'tag': 270}
