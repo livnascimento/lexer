@@ -1,5 +1,4 @@
-from Python3.lexer.token import new_token
-
+from token import new_token
 
 import tag
 
