@@ -1,8 +1,10 @@
+from token import new_token
 from num import new_num
 from real import new_real
-from token import new_token
 import tag
 import word
+
+arquivo = open('test', 'rb')
 
 line = 1
 peek = ' '
@@ -46,7 +48,6 @@ def scan():
         if lerLetra('|'):
             return word.palavras_reservadas['or']
         else:
-            global w_num
             w_num += 1
             words['lexeme' + w_num] = new_token(s='|', t='|')
             return words['lexeme' + w_num]
@@ -54,7 +55,6 @@ def scan():
         if lerLetra('='):
             return word.palavras_reservadas['eq']
         else:
-            global w_num
             w_num += 1
             words['lexeme' + w_num] = new_token(s='=', t='=')
             return words['lexeme' + w_num]
@@ -62,7 +62,6 @@ def scan():
         if lerLetra('!'):
             return word.palavras_reservadas['ne']
         else:
-            global w_num
             w_num += 1
             words['lexeme' + w_num] = new_token(s='!', t='!')
             return words['lexeme' + w_num]
@@ -70,7 +69,6 @@ def scan():
         if lerLetra('<'):
             return word.palavras_reservadas['le']
         else:
-            global w_num
             w_num += 1
             words['lexeme' + w_num] = new_token(s='<', t='<')
             return words['lexeme' + w_num]
@@ -78,7 +76,6 @@ def scan():
         if lerLetra('>'):
             return word.palavras_reservadas['ge']
         else:
-            global w_num
             w_num += 1
             words['lexeme' + w_num] = new_token(s='>', t='>')
             return words['lexeme' + w_num]
