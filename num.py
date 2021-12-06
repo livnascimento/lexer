@@ -1,4 +1,4 @@
-from token import new_token
+import token
 import tag
 
 def new_num(valor):

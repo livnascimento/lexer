@@ -1,23 +1,32 @@
-from token import new_token
-from num import new_num
-from real import new_real
+import token
+import num 
+import real
 import tag
 import word
 
-arquivo = open('test', 'rb')
-
-line = 1
+line = 0
+letra_ind = 0
 peek = ' '
 words = {} # dictionary substituindo hashtable
-w_num = -1
+w_num = 0
+
+def stringBuffer(doc, linha, letra):
+    stringbuffer = open(doc, 'rb')
+    letter = stringbuffer[linha][letra_ind]
+    stringbuffer.close()
+    return letter
 
 def reserva(p):
     global w_num
-    w_num = w_num + 1
     words['lexeme'+ w_num] = new_token(s=p,t=p)
+    w_num = w_num + 1
 
 def lerLetra():
-    peek = input()
+    global peek
+    peek = str(stringBuffer('test.txt', line, letra_ind))
+    global letra_ind
+    letra_ind += 1
+
 
 def lerLetra(letra):
     lerLetra()
@@ -33,6 +42,8 @@ def scan():
             continue
         elif peek == '\n':
             line = line + 1
+            global letra_ind
+            letra_ind = 0
         else: 
             break
     
@@ -44,6 +55,7 @@ def scan():
             w_num += 1
             words['lexeme' + w_num] = new_token(s='&', t='&')
             return words['lexeme' + w_num]
+
     elif peek == '|':
         if lerLetra('|'):
             return word.palavras_reservadas['or']
@@ -51,6 +63,7 @@ def scan():
             w_num += 1
             words['lexeme' + w_num] = new_token(s='|', t='|')
             return words['lexeme' + w_num]
+
     elif peek == '=':
         if lerLetra('='):
             return word.palavras_reservadas['eq']
@@ -58,40 +71,43 @@ def scan():
             w_num += 1
             words['lexeme' + w_num] = new_token(s='=', t='=')
             return words['lexeme' + w_num]
+
     elif peek == '!':
-        if lerLetra('!'):
+        if lerLetra('='):
             return word.palavras_reservadas['ne']
         else:
             w_num += 1
             words['lexeme' + w_num] = new_token(s='!', t='!')
             return words['lexeme' + w_num]
+
     elif peek == '<':
-        if lerLetra('<'):
+        if lerLetra('='):
             return word.palavras_reservadas['le']
         else:
             w_num += 1
             words['lexeme' + w_num] = new_token(s='<', t='<')
             return words['lexeme' + w_num]
+
     elif peek == '>':
-        if lerLetra('>'):
+        if lerLetra('='):
             return word.palavras_reservadas['ge']
         else:
             w_num += 1
             words['lexeme' + w_num] = new_token(s='>', t='>')
             return words['lexeme' + w_num]
     
+
     if peek.isdigit():
         v = 0
-
         while True:
-            v = 10*v + (int(peek))
+            v = 10*v + int(peek)
             lerLetra()
             if(not peek.isdigit()):
                 break
-        
+
         if(peek != '.'):
             return new_num(v)
-        
+
         x = v
         d = 10
 
@@ -117,7 +133,7 @@ def scan():
         for letter in buffer:
             palavra = palavra + letter
         
-        if palavra != None:
+        if palavra != '':
             return palavra
         
         words[palavra] = {'string':palavra, 'tag':tag.ID}
