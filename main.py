@@ -1,9 +1,5 @@
-from lexer import lexer
-from parser import parser
+from lexer import *
+import parser
 
-def main():
-
-    lex = lexer()
-    parse = parser(lex)
-
-main()
+while True:
+    scan()
